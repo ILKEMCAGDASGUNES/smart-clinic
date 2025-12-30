@@ -1,0 +1,50 @@
+name: CI - Frontend Lint
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check if frontend files exist
+        id: files
+        run: |
+          shopt -s globstar nullglob
+          files=(src/main/resources/static/**/*.{html,css,js})
+          if [ ${#files[@]} -eq 0 ]; then
+            echo "found=false" >> $GITHUB_OUTPUT
+          else
+            echo "found=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup Node
+        if: steps.files.outputs.found == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install linters
+        if: steps.files.outputs.found == 'true'
+        run: |
+          npm init -y
+          npm i -D eslint htmlhint stylelint stylelint-config-standard
+
+      - name: Lint HTML
+        if: steps.files.outputs.found == 'true'
+        run: npx htmlhint "src/main/resources/static/**/*.html"
+
+      - name: Lint CSS
+        if: steps.files.outputs.found == 'true'
+        run: npx stylelint "src/main/resources/static/**/*.css"
+
+      - name: Lint JS
+        if: steps.files.outputs.found == 'true'
+        run: npx eslint "src/main/resources/static/**/*.js"
+
+      - name: Skip (no frontend files)
+        if: steps.files.outputs.found != 'true'
+        run: echo "No frontend files under src/main/resources/static — skipping."
