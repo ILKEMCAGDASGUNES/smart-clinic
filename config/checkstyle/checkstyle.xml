@@ -5,7 +5,6 @@
 
 <module name="Checker">
   <module name="TreeWalker">
-    <!-- Minimal checks: CI'ı gereksiz kırmamak için -->
     <module name="UnusedImports"/>
   </module>
 </module>
