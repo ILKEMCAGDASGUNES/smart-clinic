@@ -13,6 +13,11 @@ public class Patient {
     private long  id;
 
     private String name;
+
+    @Column(unique = true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String password;
+
 }
