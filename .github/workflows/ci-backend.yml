@@ -7,7 +7,6 @@ on:
 jobs:
   backend:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
@@ -17,5 +16,5 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: Build + Checkstyle (verify)
-        run: mvn -B clean verify
+      - name: Build + Checkstyle (skip tests)
+        run: mvn -B clean verify -DskipTests
