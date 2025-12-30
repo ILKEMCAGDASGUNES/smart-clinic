@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>SmartClinic Login</title>
+
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+</head>
+<body>
+
+<main style="max-width:420px;margin:40px auto;">
+    <h1>SmartClinic</h1>
+
+    <label style="display:block;margin-top:12px;">Role</label>
+    <select id="roleSelect" style="width:100%;padding:8px;">
+        <option value="ADMIN">ADMIN</option>
+        <option value="DOCTOR">DOCTOR</option>
+    </select>
+
+    <label style="display:block;margin-top:12px;">Email</label>
+    <input id="email" type="email" placeholder="email" style="width:100%;padding:8px;"/>
+
+    <label style="display:block;margin-top:12px;">Password</label>
+    <input id="password" type="password" placeholder="password" style="width:100%;padding:8px;"/>
+
+    <button id="loginBtn" style="width:100%;padding:10px;margin-top:16px;">Login</button>
+
+    <p id="error" style="margin-top:12px;color:#b00020;"></p>
+</main>
+
+<script type="module" th:src="@{/js/index.js}"></script>
+</body>
+</html>

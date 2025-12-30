@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/adminDashboard.css}">
+</head>
+<body>
+
+<div id="header"></div>
+
+<main>
+    <h1>Admin Dashboard</h1>
+
+    <section>
+        <input id="doctorSearch" type="text" placeholder="Search doctor by name..." />
+        <select id="specialtyFilter">
+            <option value="">All Specialties</option>
+        </select>
+        <select id="timeFilter">
+            <option value="">All Times</option>
+        </select>
+
+        <button id="openAddDoctorModal">Add Doctor</button>
+    </section>
+
+    <section id="doctorList"></section>
+
+    <div id="modalRoot"></div>
+</main>
+
+<script type="module" th:src="@{/js/adminDashboard.js}"></script>
+</body>
+</html>

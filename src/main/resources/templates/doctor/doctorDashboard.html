@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Doctor Dashboard</title>
+
+    <link rel="stylesheet" th:href="@{/assets/css/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/doctorDashboard.css}">
+</head>
+<body>
+
+<div id="header"></div>
+
+<main>
+    <h1>Doctor Dashboard</h1>
+
+    <section>
+        <input id="appointmentSearch" type="text" placeholder="Search by patient name..." />
+        <input id="dateFilter" type="date" />
+    </section>
+
+    <section id="appointmentList"></section>
+
+    <div id="modalRoot"></div>
+</main>
+
+<script type="module" th:src="@{/js/doctorDashboard.js}"></script>
+</body>
+</html>

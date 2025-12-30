@@ -1,0 +1,36 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: smartclinic
+      MYSQL_USER: smartclinic
+      MYSQL_PASSWORD: smartclinicpass
+      MYSQL_ROOT_PASSWORD: rootpass
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  mongo:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+
+  backend:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/smartclinic
+      SPRING_DATASOURCE_USERNAME: smartclinic
+      SPRING_DATASOURCE_PASSWORD: smartclinicpass
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/smartclinic
+    depends_on:
+      mysql:
+        condition: service_healthy
+      mongo:
+        condition: service_started
