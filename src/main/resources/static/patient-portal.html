@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Patient Portal</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 24px; }
+        .card { border: 1px solid #ddd; padding: 12px; margin-top: 12px; max-width: 520px; }
+        input { padding: 8px; width: 320px; }
+    </style>
+</head>
+<body>
+<h1>Patient Portal</h1>
+
+<label for="doctorSearch"><b>Search doctor by name</b></label><br/>
+<input id="doctorSearch" type="text" placeholder="Type a doctor's name..." />
+
+<div id="results"></div>
+
+<script>
+    // Demo doctor list (en az 1 doktor gösterilecek)
+    const doctors = [
+        { name: "Dr John Doe", specialty: "Cardiology" },
+        { name: "Dr Emily Stone", specialty: "Dermatology" },
+        { name: "Dr Ahmet Yilmaz", specialty: "Neurology" }
+    ];
+
+    const input = document.getElementById("doctorSearch");
+    const results = document.getElementById("results");
+
+    function render(list) {
+        results.innerHTML = "";
+        if (list.length === 0) {
+            results.innerHTML = "<p><i>No doctors found</i></p>";
+            return;
+        }
+        list.forEach(d => {
+            const div = document.createElement("div");
+            div.className = "card";
+            div.innerHTML = `<b>${d.name}</b><div>Specialty: ${d.specialty}</div>`;
+            results.appendChild(div);
+        });
+    }
+
+    // başlangıçta hepsini göster
+    render(doctors);
+
+    input.addEventListener("input", () => {
+        const q = input.value.trim().toLowerCase();
+        const filtered = doctors.filter(d => d.name.toLowerCase().includes(q));
+        render(filtered);
+    });
+</script>
+</body>
+</html>
